@@ -51,6 +51,12 @@ def update_name(names):
     print(f"worksheet updated successfully\n")
 
 
+def question_one():
+    topic = QUESTIONS.cell(1,3).value
+    qi_rating = input(f"I {topic}: \n")
+
+
+
 
 
 def main():
@@ -59,6 +65,7 @@ def main():
     """
     names = get_employee_name()
     update_name(names)
+    question_one()
 
 
 
