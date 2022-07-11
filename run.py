@@ -23,11 +23,36 @@ def get_employee_name():
     """
     first_name = input("what is your first name? \n")
     last_name = input("what is your last name? \n")
-    print(first_name, last_name)
     return first_name, last_name
+
+def validate_name(name):
+    for i in name:
+        try:
+            if i.isalpha()==False:
+                raise ValueError(
+                    f"Your name must alphabetical.\n {i} contains invalid symbols \n"
+                )
+        except ValueError as e:
+            print(f"Invalid entry.{e}Please try again")
+            
+
+#def validate_name(name):
+ #   for i in name:
+  #      if i.isalpha():
+   #         print("good")
+    #    else:
+     #       print("bad")
+      #      ValueError()
+        
 
 
 def main():
-    get_employee_name()
+    """
+    Runs all functions
+    """
+    name = get_employee_name()
+    validate_name(name)
+
+
 
 main()
