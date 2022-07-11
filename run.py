@@ -13,8 +13,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('staff_appraisals')
 
-questions = SHEET.worksheet('questions')
-data = questions.get_all_values()
+QUESTIONS = SHEET.worksheet('questions')
+data = QUESTIONS.get_all_values()
 
 
 def get_employee_name():
@@ -28,6 +28,9 @@ def get_employee_name():
     return first_name, last_name
 
 def validate_name(full_name):
+    """
+    Checks users entry contains letters only
+    """
     for i in full_name:
         try:
             if i.isalpha()==False:
@@ -36,16 +39,18 @@ def validate_name(full_name):
                 )
         except ValueError as e:
             print(f"Invalid entry.{e}Please try again")
-            
 
-#def validate_name(name):
- #   for i in name:
-  #      if i.isalpha():
-   #         print("good")
-    #    else:
-     #       print("bad")
-      #      ValueError()
-        
+
+
+def update_name(names):
+    """
+    Add name values to questions spreadsheet
+    """
+    print(f"Updating...\n")
+    QUESTIONS.append_row(names)
+    print(f"worksheet updated successfully\n")
+
+
 
 
 def main():
@@ -53,6 +58,7 @@ def main():
     Runs all functions
     """
     names = get_employee_name()
+    update_name(names)
 
 
 
