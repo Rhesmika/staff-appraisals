@@ -23,10 +23,12 @@ def get_employee_name():
     """
     first_name = input("what is your first name? \n")
     last_name = input("what is your last name? \n")
+    full_name = first_name,last_name
+    validate_name(full_name)
     return first_name, last_name
 
-def validate_name(name):
-    for i in name:
+def validate_name(full_name):
+    for i in full_name:
         try:
             if i.isalpha()==False:
                 raise ValueError(
@@ -50,8 +52,8 @@ def main():
     """
     Runs all functions
     """
-    name = get_employee_name()
-    validate_name(name)
+    names = get_employee_name()
+
 
 
 
