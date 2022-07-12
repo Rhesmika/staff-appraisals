@@ -35,7 +35,7 @@ def validate_name(full_name):
         try:
             if i.isalpha()==False:
                 raise ValueError(
-                    f"Your name must alphabetical.\n {i} contains invalid symbols \n"
+                    f"Your name must alphabetical.\n'{i}' contains invalid symbols \n"
                 )
         except ValueError as e:
             print(f"Invalid entry.{e}Please try again.")
@@ -57,15 +57,14 @@ def question_one():
     return qi_rating
     
 
-def validate_rating(ratings):
-    for answer in ratings:
-        try:
-            if answer.isdigit()==False:
-                raise ValueError(
-                    f"{answer} contains something other than numbers. "
-                )
-        except ValueError as e:
-            print(f"Invalid entry. {e}. Please try again.")
+def validate_rating(q_one_answer):
+    try:
+        if q_one_answer.isdigit()==False:
+            raise ValueError(
+                f"Your rating must be a whole number.\n'{q_one_answer}' contains something other than numbers.\n"
+            )
+    except ValueError as e:
+        print(f"Invalid entry. {e} Please try again.")
 
 
 
@@ -78,8 +77,8 @@ def main():
     """
     names = get_employee_name()
     update_name(names)
-    ratings = question_one()
-    validate_rating(ratings)
+    q_one_answer = question_one()
+    validate_rating(q_one_answer)
     
 
 
