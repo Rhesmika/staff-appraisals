@@ -29,7 +29,7 @@ def get_employee_name():
 
 def validate_name(full_name):
     """
-    Checks users entry contains letters only
+    Checks users entry contains letters only. Raises error if not.
     """
     for i in full_name:
         try:
@@ -52,19 +52,30 @@ def update_name(names):
 
 
 def question_one():
+    """
+    Gets users rating to question one from spreadsheet
+    """
     topic = QUESTIONS.cell(1,3).value
     qi_rating = input(f"I {topic}: \n")
     return qi_rating
     
 
 def validate_rating(q_one_answer):
+    """
+    Validates if question one answer is a number. Raises error if not. 
+    """
     try:
-        if q_one_answer.isdigit()==False:
-            raise ValueError(
-                f"Your rating must be a whole number.\n'{q_one_answer}' contains something other than numbers.\n"
-            )
-    except ValueError as e:
-        print(f"Invalid entry. {e} Please try again.")
+        print(int(q_one_answer))
+    except Exception:
+        print("Please enter a whole number")
+        question_one()
+
+    #     if q_one_answer.isdigit()==False:
+    #         raise ValueError(
+    #             f"Your rating must be a whole number.\n'{q_one_answer}' contains something other than numbers.\n"
+    #         )
+    # except ValueError as e:
+    #     print(f"Invalid entry. {e} Please try again.")
 
 
 
