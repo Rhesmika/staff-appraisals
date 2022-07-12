@@ -38,7 +38,7 @@ def validate_name(full_name):
                     f"Your name must alphabetical.\n {i} contains invalid symbols \n"
                 )
         except ValueError as e:
-            print(f"Invalid entry.{e}Please try again")
+            print(f"Invalid entry.{e}Please try again.")
 
 
 
@@ -54,6 +54,19 @@ def update_name(names):
 def question_one():
     topic = QUESTIONS.cell(1,3).value
     qi_rating = input(f"I {topic}: \n")
+    return qi_rating
+    
+
+def validate_rating(ratings):
+    for answer in ratings:
+        try:
+            if answer.isdigit()==False:
+                raise ValueError(
+                    f"{answer} contains something other than numbers. "
+                )
+        except ValueError as e:
+            print(f"Invalid entry. {e}. Please try again.")
+
 
 
 
@@ -65,7 +78,9 @@ def main():
     """
     names = get_employee_name()
     update_name(names)
-    question_one()
+    ratings = question_one()
+    validate_rating(ratings)
+    
 
 
 
