@@ -21,11 +21,17 @@ def get_employee_name():
     """
     Gets users name
     """
-    first_name = input("what is your first name? \n")
-    last_name = input("what is your last name? \n")
-    full_name = first_name,last_name
-    validate_name(full_name)
+    while True: 
+        first_name = input("what is your first name? \n")
+        last_name = input("what is your last name? \n")
+        full_name = first_name,last_name
+
+        if validate_name(full_name):
+            print("name is ok!")
+            break
     return first_name, last_name
+
+
 
 def validate_name(full_name):
     """
@@ -39,6 +45,9 @@ def validate_name(full_name):
                 )
         except ValueError as e:
             print(f"Invalid entry.{e}Please try again.")
+            return False
+
+    return True
 
 
 
@@ -68,7 +77,7 @@ def validate_rating(qi_rating):
     try:
         if qi_rating.isnumeric()==False:
             raise ValueError(
-                f"{qi_rating} is not a valid entry"
+                f"{qi_rating} is not a valid entry."
             )
         if int(qi_rating) > 5:
             raise ValueError(
@@ -79,20 +88,8 @@ def validate_rating(qi_rating):
                 f"{qi_rating} is less than 1."
             )
     except ValueError as e:
-        print(f"{e}")
+        print(f"{e}\nPlease enter a number between 1-5...")
         question_one()
-        
-        
-
-
-    #     if q_one_answer.isdigit()==False:
-    #         raise ValueError(
-    #             f"Your rating must be a whole number.\n'{q_one_answer}' contains something other than numbers.\n"
-    #         )
-    # except ValueError as e:
-    #     print(f"Invalid entry. {e} Please try again.")
-
-
 
 
 
