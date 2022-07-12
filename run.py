@@ -57,18 +57,33 @@ def question_one():
     """
     topic = QUESTIONS.cell(1,3).value
     qi_rating = input(f"I {topic}: \n")
-    return qi_rating
+    validate_rating(qi_rating)
+
     
 
-def validate_rating(q_one_answer):
+def validate_rating(qi_rating):
     """
     Validates if question one answer is a number. Raises error if not. 
     """
     try:
-        print(int(q_one_answer))
-    except Exception:
-        print("Please enter a whole number")
+        if qi_rating.isnumeric()==False:
+            raise ValueError(
+                f"{qi_rating} is not a valid entry"
+            )
+        if int(qi_rating) > 5:
+            raise ValueError(
+                f"{qi_rating} is more than 5."
+            )
+        if int(qi_rating) < 1:
+            raise ValueError(
+                f"{qi_rating} is less than 1."
+            )
+    except ValueError as e:
+        print(f"{e}")
         question_one()
+        
+        
+
 
     #     if q_one_answer.isdigit()==False:
     #         raise ValueError(
@@ -88,8 +103,8 @@ def main():
     """
     names = get_employee_name()
     update_name(names)
-    q_one_answer = question_one()
-    validate_rating(q_one_answer)
+    question_one()
+
     
 
 
