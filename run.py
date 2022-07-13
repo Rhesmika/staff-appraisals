@@ -27,7 +27,6 @@ def get_employee_name():
         full_name = first_name,last_name
 
         if validate_name(full_name):
-            print("name is ok!")
             break
     return first_name, last_name
 
@@ -64,9 +63,13 @@ def question_one():
     """
     Gets users rating to question one from spreadsheet
     """
-    topic = QUESTIONS.cell(1,3).value
-    qi_rating = input(f"I {topic}: \n")
-    validate_rating(qi_rating)
+    while True:
+        topic = QUESTIONS.cell(1,3).value
+        qi_rating = input(f"I {topic}: \n")
+        if validate_rating(qi_rating):
+            break
+    return qi_rating
+
 
     
 
@@ -90,7 +93,10 @@ def validate_rating(qi_rating):
     except ValueError as e:
         print(f"{e}\nPlease enter a number between 1-5...")
         question_one()
+    return True
 
+# def update_qi_answer(qi_answer):
+#     print(qi_answer
 
 
 
@@ -100,8 +106,8 @@ def main():
     """
     names = get_employee_name()
     update_name(names)
-    question_one()
-
+    qi_answer = question_one()
+    # update_qi_answer(qi_answer)
     
 
 
