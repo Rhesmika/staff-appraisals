@@ -49,16 +49,6 @@ def validate_name(full_name):
     return True
 
 
-
-def update_name(names):
-    """
-    Add name values to questions spreadsheet
-    """
-    print(f"Updating...\n")
-    QUESTIONS.append_row(names)
-    print(f"worksheet updated successfully\n")
-
-
 def question_one():
     """
     Gets users rating to question one from spreadsheet
@@ -68,7 +58,7 @@ def question_one():
         qi_rating = input(f"I {topic}: \n")
         if validate_rating(qi_rating):
             break
-    return qi_rating
+    return (qi_rating, )
 
 
     
@@ -95,19 +85,24 @@ def validate_rating(qi_rating):
         question_one()
     return True
 
-# def update_qi_answer(qi_answer):
-#     print(qi_answer
+def update_answers(names, qi_answer):
+    print(f"Updating...\n")
+    data = (*names, *qi_answer)
+    QUESTIONS.append_row(data)
+    print(f"worksheet updated successfully\n")
+
 
 
 
 def main():
     """
-    Runs all functions
+    Runs all functionss
     """
     names = get_employee_name()
-    update_name(names)
     qi_answer = question_one()
-    # update_qi_answer(qi_answer)
+    update_answers(names, qi_answer)
+
+
     
 
 
