@@ -85,9 +85,49 @@ def validate_rating(qi_rating):
         question_one()
     return True
 
-def update_answers(names, qi_answer):
+def question_two():
+    """
+    Gets users rating to question one from spreadsheet
+    """
+    while True:
+        topic = QUESTIONS.cell(1,4).value
+        qii_rating = input(f"I {topic}: \n")
+        if validate_rating(qii_rating):
+            break
+    return (qii_rating, )
+
+
+    
+
+def validate_rating(qii_rating):
+    """
+    Validates if question two answer is a number. Raises error if not. 
+    """
+    try:
+        if qii_rating.isnumeric()==False:
+            raise ValueError(
+                f"{qii_rating} is not a valid entry."
+            )
+        if int(qii_rating) > 5:
+            raise ValueError(
+                f"{qii_rating} is more than 5."
+            )
+        if int(qii_rating) < 1:
+            raise ValueError(
+                f"{qii_rating} is less than 1."
+            )
+    except ValueError as e:
+        print(f"{e}\nPlease enter a number between 1-5...")
+        question_two()
+    return True
+
+
+def update_answers(names, qi_answer, qii_answer):
+    """
+    Updates worksheet with user answers
+    """
     print(f"Updating...\n")
-    data = (*names, *qi_answer)
+    data = (*names, *qi_answer, *qii_answer)
     QUESTIONS.append_row(data)
     print(f"worksheet updated successfully\n")
 
@@ -100,7 +140,8 @@ def main():
     """
     names = get_employee_name()
     qi_answer = question_one()
-    update_answers(names, qi_answer)
+    qii_answer = question_two()
+    update_answers(names, qi_answer, qii_answer)
 
 
     
