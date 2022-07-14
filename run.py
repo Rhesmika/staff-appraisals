@@ -17,6 +17,7 @@ data = QUESTIONS.get_all_values()
 
 
 
+
 def get_employee_name():
     """
     Gets users name
@@ -46,7 +47,6 @@ def validate_name(full_name):
     return True
 
 
-
 def question_one():
     """
     Gets users rating to question one from spreadsheet
@@ -57,7 +57,6 @@ def question_one():
             if validate_rating(qi_rating):          
                 break        
     return (qi_rating, )
-
 
 def question_two():
     """
@@ -92,8 +91,6 @@ def question_four():
                 break        
     return (qiv_rating, )
 
-
-
 def validate_rating(values):
     """
     Validates if question answer is a number between 1 and 5. Raises error if not. 
@@ -118,7 +115,6 @@ def validate_rating(values):
             print(f"{e}\nPlease enter a number between 1-5...")
             return False
     return True
-
 
 
 def question_five():
@@ -151,13 +147,12 @@ def validate_yn(qv_rating):
     return True
 
 
-def update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer, qv_answer):
+def update_answers(answers):
     """
     Updates worksheet with user answers
     """
     print(f"Updating...\n")
-    data = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
-    QUESTIONS.append_row(data)
+    QUESTIONS.append_row(answers)
     print(f"worksheet updated successfully\n")
 
 
@@ -178,7 +173,8 @@ def main():
     qiii_answer = question_three()
     qiv_answer = question_four()
     qv_answer = question_five()
-    update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer, qv_answer)
+    answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
+    update_answers(answers)
 
 
     
