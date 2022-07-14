@@ -14,6 +14,7 @@ SHEET = GSPREAD_CLIENT.open('staff_appraisals')
 
 QUESTIONS = SHEET.worksheet('questions')
 data = QUESTIONS.get_all_values()
+SALARY = SHEET.worksheet('salary')
 
 
 
@@ -141,7 +142,7 @@ def validate_yn(qv_rating):
                 f"{qv_rating}is not valid"
             )
     except ValueError as e:
-        print(f"{e}\nPlease enter exactly 'yes' or 'no'")
+        print("Please enter exactly 'yes' or 'no'")
         return False
     return True
 
@@ -154,7 +155,13 @@ def update_answers(answers):
     QUESTIONS.append_row(answers)
     print(f"worksheet updated successfully\n")
 
-
+def update_salary(names):
+    """
+    Updates salary worksheet with salary desire
+    """
+    print(f"Updating...\n")
+    SALARY.append_row(names)
+    print(f"worksheet updated successfully\n")
 
 
 
@@ -174,6 +181,7 @@ def main():
     qv_answer = question_five()
     answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
     update_answers(answers)
+    update_salary(names)
 
 
     
