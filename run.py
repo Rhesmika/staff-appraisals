@@ -121,20 +121,49 @@ def validate_rating(values):
 
 
 
+def question_five():
+    """
+    Gets users rating to question five from spreadsheet
+    """
+    while True:
+            topic = QUESTIONS.cell(1,7).value
+            qv_rating = input(f"I {topic}: \n")
+            if validate_yn(qv_rating):          
+                break        
+    return (qv_rating, )
+
+def validate_yn(qv_rating):
+    """
+    Validates if answer to question 5 is yes or no
+    """
+    try:
+        if qv_rating == "yes":
+            print("you entered YES")
+        if qv_rating == "no":
+            print("you entered NO")    
+        else:
+            raise ValueError(
+                f"{qv_rating}is not valid"
+            )
+    except ValueError as e:
+        print(f"{e}\nPlease enter exactly 'yes' or 'no'")
+        return False
+    return True
 
 
-
-
-
-
-def update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer):
+def update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer, qv_answer):
     """
     Updates worksheet with user answers
     """
     print(f"Updating...\n")
-    data = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer)
+    data = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
     QUESTIONS.append_row(data)
     print(f"worksheet updated successfully\n")
+
+
+
+
+
 
 
 
@@ -148,8 +177,8 @@ def main():
     qii_answer = question_two()
     qiii_answer = question_three()
     qiv_answer = question_four()
-
-    update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer)
+    qv_answer = question_five()
+    update_answers(names, qi_answer, qii_answer, qiii_answer, qiv_answer, qv_answer)
 
 
     
