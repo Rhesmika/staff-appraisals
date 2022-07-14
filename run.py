@@ -155,12 +155,45 @@ def update_answers(answers):
     QUESTIONS.append_row(answers)
     print(f"worksheet updated successfully\n")
 
-def update_salary(names):
+def user_salary():
+    """
+    Gets users current salary from user
+    """
+    while True:
+            salary = input(f"What is your current annual salary?\nenter amount with no punction or symbol\n")
+            if validate_salary(salary):          
+                break        
+    return (salary)
+
+def validate_salary(salary):
+    """
+    Checks salary input contains numbers only and no punctuation or symbols
+    """
+    # try:
+    #     if salary.isnumeric() == False:
+    #         raise ValueError(
+    #             "You must enter a whole number"
+    #         )
+    #     else:
+    #         int(salary)
+    #         print(len(salary))
+    #         if len(salary) != 5:
+    #             raise ValueError(
+    #                 f"Exactly 5 numberica figures required, you provided {len(salary)}"
+    #             )
+
+    # except ValueError as e:
+    #     print(f"Invalid data: {e}, please try again.\n")
+    #     return False
+    # return True
+
+
+def update_salary(salary_data):
     """
     Updates salary worksheet with salary desire
     """
     print(f"Updating...\n")
-    SALARY.append_row(names)
+    SALARY.append_row(salary_data)
     print(f"worksheet updated successfully\n")
 
 
@@ -181,7 +214,9 @@ def main():
     qv_answer = question_five()
     answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
     update_answers(answers)
-    update_salary(names)
+    current_salary = user_salary()
+    salary_data = (*names, *current_salary)
+    update_salary(salary_data)
 
 
     
