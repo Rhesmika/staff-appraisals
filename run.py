@@ -133,10 +133,9 @@ def validate_yn(qv_rating):
     Validates if answer to question 5 is yes or no
     """
     try:
-        if qv_rating == "yes":
-            print("you entered YES")
-        if qv_rating == "no":
-            print("you entered NO")    
+        if qv_rating == "yes" or qv_rating == "no":
+            print(f"you entered {qv_rating}")
+ 
         else:
             raise ValueError(
                 f"{qv_rating}is not valid"
