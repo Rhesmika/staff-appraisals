@@ -197,15 +197,37 @@ def update_salary(salary_data):
     SALARY.append_row(salary_data)
     print(f"worksheet updated successfully\n")
 
+
+
 def desired_increase():
     """
     Gets users desired increase of wage
     """
     while True:
             percentage_increase = input(f"What is your desired percentage increase?\n")
-            if vaidate percentage(percentage_increase):          
+            if vaidate_percentage(percentage_increase):          
                 break        
     return (percentage_increase, )
+
+def vaidate_percentage(percentage_increase):
+    try:
+        if "%" in percentage_increase:
+            raise ValueError(
+                "Please do not enter the percentage symbol"
+            )
+        if percentage_increase.isnumeric() == False:
+            raise ValueError(
+                f"{percentage_increase} is not a valid number."
+            )
+        else:
+            if int(percentage_increase) >= 100:
+                raise ValueError(
+                    f"Your request for an increase of 100% or over has been denied."
+                )
+    except ValueError as e:
+        print(f"{e}\nPlease try again.")
+        return False
+    return True   
 
 
 
@@ -215,19 +237,19 @@ def main():
     """
     Runs all functionss
     """
-    names = get_employee_name()
+    # names = get_employee_name()
 
-    qi_answer = question_one()
-    qii_answer = question_two()
-    qiii_answer = question_three()
-    qiv_answer = question_four()
-    qv_answer = question_five()
-    answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
-    update_answers(answers)
+    # qi_answer = question_one()
+    # qii_answer = question_two()
+    # qiii_answer = question_three()
+    # qiv_answer = question_four()
+    # qv_answer = question_five()
+    # answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
+    # update_answers(answers)
 
     current_salary = user_salary()
-    salary_data = (*names, *current_salary *percent)
     percent = desired_increase()
+    salary_data = (*names, *current_salary, *percent)
     update_salary(salary_data)
 
 
