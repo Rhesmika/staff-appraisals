@@ -103,19 +103,22 @@ def validate_rating(values):
     """
     for rating in values:
         try:
+            if len(values) >1:
+                raise ValueError(
+                    "You must enter a single number"
+                )
             if rating.isnumeric() == False:
                 raise ValueError(
                     "You must enter a whole number"
                 )
             else:
-                int_rating = int(rating)
-                if int_rating > 5:
+                if int(rating) > 5:
                     raise ValueError(
-                        f"{int_rating} is more than 5."
+                        f"{rating} is more than 5."
                     )
-                if int_rating < 1:
+                if int(rating) < 1:
                     raise ValueError(
-                        f"{int_rating} is less than 1."
+                        f"{rating} is less than 1."
                     )
         except ValueError as e:
             print(f"{e}\nPlease enter a whole number between 1-5...")
@@ -144,10 +147,10 @@ def validate_yn(qv_rating):
             print("Thank you for your honesty")
         else:
             raise ValueError(
-                f"{qv_rating}is not valid"
+                f"{qv_rating} is not valid."
             )
     except ValueError as e:
-        print(f"{e}Please enter exactly 'yes' or 'no'")
+        print(f"{e} Please enter exactly 'yes' or 'no'")
         return False
     return True
 
