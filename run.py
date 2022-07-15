@@ -21,15 +21,16 @@ def get_employee_name():
     """
     Gets users name
     """
-    while True: 
+    while True:
         print("Welcome to your staff appraisal form.\n")
         first_name = input("what is your first name? \n")
         last_name = input("\nwhat is your last name? \n")
-        full_name = first_name,last_name
+        full_name = first_name, last_name
 
         if validate_name(full_name):
             break
     return first_name, last_name
+
 
 def validate_name(full_name):
     """
@@ -37,9 +38,9 @@ def validate_name(full_name):
     """
     for i in full_name:
         try:
-            if i.isalpha() == False:
+            if i.isalpha() is False:
                 raise ValueError(
-                    f"Your name must alphabetical.\n'{i}' contains invalid symbols.\n"
+                    f"{i}' contains invalid symbols.\n"
                 )
         except ValueError as e:
             print(f"{e}Please enter your name again.")
@@ -57,9 +58,10 @@ def question_one():
             topic = QUESTIONS.cell(1, 3).value
             print("On a scale of 1-5:")
             qi_rating = input(f"I {topic}. \n")
-            if validate_rating(qi_rating):          
-                break        
+            if validate_rating(qi_rating):
+                break
     return (qi_rating, )
+
 
 def question_two():
     """
@@ -67,11 +69,12 @@ def question_two():
     """
     while True:
             topic = QUESTIONS.cell(1, 4).value
-            print("\nOn a scale of 1-5:")            
+            print("\nOn a scale of 1-5:")
             qii_rating = input(f"I {topic}. \n")
-            if validate_rating(qii_rating):          
-                break        
+            if validate_rating(qii_rating):
+                break
     return (qii_rating, )
+
 
 def question_three():
     """
@@ -79,11 +82,12 @@ def question_three():
     """
     while True:
             topic = QUESTIONS.cell(1, 5).value
-            print("\nOn a scale of 1-5:")            
+            print("\nOn a scale of 1-5:")
             qiii_rating = input(f"I {topic}. \n")
-            if validate_rating(qiii_rating):          
-                break        
+            if validate_rating(qiii_rating):
+                break
     return (qiii_rating, )
+
 
 def question_four():
     """
@@ -91,11 +95,12 @@ def question_four():
     """
     while True:
             topic = QUESTIONS.cell(1, 6).value
-            print("\nOn a scale of 1-5:")            
+            print("\nOn a scale of 1-5:")
             qiv_rating = input(f"I {topic}. \n")
-            if validate_rating(qiv_rating):          
-                break        
+            if validate_rating(qiv_rating):
+                break
     return (qiv_rating, )
+
 
 def validate_rating(values):
     """
@@ -103,11 +108,11 @@ def validate_rating(values):
     """
     for rating in values:
         try:
-            if len(values) >1:
+            if len(values) > 1:
                 raise ValueError(
                     "You must enter a single number"
                 )
-            if rating.isnumeric() == False:
+            if rating.isnumeric() is False:
                 raise ValueError(
                     "You must enter a whole number"
                 )
@@ -134,9 +139,10 @@ def question_five():
             topic = QUESTIONS.cell(1, 7).value
             print("\nPlease answer this question as 'yes' or 'no'.")
             qv_rating = input(f"I {topic}: \n")
-            if validate_yn(qv_rating):          
-                break        
+            if validate_yn(qv_rating):
+                break
     return (qv_rating, )
+
 
 def validate_yn(qv_rating):
     """
@@ -161,17 +167,18 @@ def user_salary():
     """
     while True:
         print("\nPlease answer this question without symbols or commas.")
-        salary = input(f"What is your current annual salary?\n")
-        if validate_salary(salary):          
-            break        
+        salary = input("What is your current annual salary?\n")
+        if validate_salary(salary):
+            break
     return (salary, )
+
 
 def validate_salary(salary):
     """
     Checks salary input contains numbers only and no punctuation or symbols
     """
     try:
-        if salary.isnumeric() == False:
+        if salary.isnumeric() is False:
             raise ValueError(
                 f"{salary} is not a valid answer"
             )
@@ -187,7 +194,7 @@ def validate_salary(salary):
     except ValueError as e:
         print(f"{e}\nPlease try again and answer your annual salary.")
         return False
-    return True    
+    return True
 
 
 def desired_increase():
@@ -197,33 +204,35 @@ def desired_increase():
     while True:
         print("\nPlease answer this question as a whole number.")
         print("No % symbol is required.")
-        percentage_increase = input("What is your desired percentage annual salary increase?\n")
-        if vaidate_percentage(percentage_increase):          
-            break        
-    return (percentage_increase, )
+        percentage_inc = input("What percentage increase would you like?\n")
+        if vaidate_percentage(percentage_inc):
+            break
+    return (percentage_inc, )
 
-def vaidate_percentage(percentage_increase):
+
+def vaidate_percentage(percentage_inc):
     """
     Validates the percentage increase requested
     """
     try:
-        if "%" in percentage_increase:
+        if "%" in percentage_inc:
             raise ValueError(
                 "Please do not enter the percentage symbol."
             )
-        if percentage_increase.isnumeric() == False:
+        if percentage_inc.isnumeric() is False:
             raise ValueError(
-                f"{percentage_increase} is not a valid number."
+                f"{percentage_inc} is not a valid number."
             )
         else:
-            if int(percentage_increase) >= 100:
+            if int(percentage_inc) >= 100:
                 raise ValueError(
-                    f"Sorry, your request for an increase of {percentage_increase}% is too high and will be denied."
+                    f"Your request to increase {percentage_inc}% is too high."
                 )
     except ValueError as e:
         print(f"{e}\nPlease try again.")
         return False
-    return True   
+    return True
+
 
 def calculate_salary_increase(current_salary, percent):
     """
@@ -236,11 +245,11 @@ def calculate_salary_increase(current_salary, percent):
     return new_salary
 
 
-def update_answers(answers):
+def update_answers(ans):
     """
     Updates worksheet with user answers
     """
-    QUESTIONS.append_row(answers)
+    QUESTIONS.append_row(ans)
     print("\nYour answers have been submitted,")
 
 
@@ -254,27 +263,29 @@ def update_salary(salary_data, names):
     print(f"Thank you for your time today {names[0]}!")
     print("Your manager will arrange a meeting with you shortly.")
 
+
 def main():
     """
     Runs all functionss
     """
     names = get_employee_name()
 
-    qi_answer = question_one()
-    qii_answer = question_two()
-    qiii_answer = question_three()
-    qiv_answer = question_four()
-    qv_answer = question_five()
+    qi_ans = question_one()
+    qii_ans = question_two()
+    qiii_ans = question_three()
+    qiv_ans = question_four()
+    qv_ans = question_five()
 
-    answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
-    
+    ans = (*names, *qi_ans, *qii_ans, *qiii_ans, *qiv_ans, *qv_ans)
+
     current_salary = user_salary()
     percent = desired_increase()
     new_salary = calculate_salary_increase(current_salary, percent)
 
     salary_data = (*names, *current_salary, *percent, new_salary)
-    
-    update_answers(answers)
+
+    update_answers(ans)
     update_salary(salary_data, names)
+
 
 main()
