@@ -39,10 +39,10 @@ def validate_name(full_name):
         try:
             if i.isalpha() == False:
                 raise ValueError(
-                    f"Your name must alphabetical.\n'{i}' contains invalid symbols \n"
+                    f"Your name must alphabetical.\n'{i}' contains invalid symbols.\n"
                 )
         except ValueError as e:
-            print(f"Invalid entry.{e}Please try again.")
+            print(f"{e}Please enter your name again.")
             return False
     return True
 
@@ -54,7 +54,7 @@ def question_one():
     print("\nPlease answer the following questions rating your answer 1-5.")
     print("1 being strongly disagree. 5 being strongly agree.\n")
     while True:
-            topic = QUESTIONS.cell(1,3).value
+            topic = QUESTIONS.cell(1, 3).value
             print("On a scale of 1-5:")
             qi_rating = input(f"I {topic}. \n")
             if validate_rating(qi_rating):          
@@ -66,7 +66,7 @@ def question_two():
     Gets users rating to question two from spreadsheet
     """
     while True:
-            topic = QUESTIONS.cell(1,4).value
+            topic = QUESTIONS.cell(1, 4).value
             print("\nOn a scale of 1-5:")            
             qii_rating = input(f"I {topic}. \n")
             if validate_rating(qii_rating):          
@@ -78,7 +78,7 @@ def question_three():
     Gets users rating to question three from spreadsheet
     """
     while True:
-            topic = QUESTIONS.cell(1,5).value
+            topic = QUESTIONS.cell(1, 5).value
             print("\nOn a scale of 1-5:")            
             qiii_rating = input(f"I {topic}. \n")
             if validate_rating(qiii_rating):          
@@ -90,7 +90,7 @@ def question_four():
     Gets users rating to question four from spreadsheet
     """
     while True:
-            topic = QUESTIONS.cell(1,6).value
+            topic = QUESTIONS.cell(1, 6).value
             print("\nOn a scale of 1-5:")            
             qiv_rating = input(f"I {topic}. \n")
             if validate_rating(qiv_rating):          
@@ -118,7 +118,7 @@ def validate_rating(values):
                         f"{int_rating} is less than 1."
                     )
         except ValueError as e:
-            print(f"{e}\nPlease enter a number between 1-5...")
+            print(f"{e}\nPlease enter a whole number between 1-5...")
             return False
     return True
 
@@ -128,8 +128,8 @@ def question_five():
     Gets users rating to question five from spreadsheet
     """
     while True:
-            topic = QUESTIONS.cell(1,7).value
-            print("\nPlease answer this question as 'yes' or 'no'")
+            topic = QUESTIONS.cell(1, 7).value
+            print("\nPlease answer this question as 'yes' or 'no'.")
             qv_rating = input(f"I {topic}: \n")
             if validate_yn(qv_rating):          
                 break        
@@ -141,14 +141,13 @@ def validate_yn(qv_rating):
     """
     try:
         if qv_rating == "yes" or qv_rating == "no":
-            print(f"you entered {qv_rating}")
- 
+            print("Thank you for your honesty")
         else:
             raise ValueError(
                 f"{qv_rating}is not valid"
             )
     except ValueError as e:
-        print("Please enter exactly 'yes' or 'no'")
+        print(f"{e}Please enter exactly 'yes' or 'no'")
         return False
     return True
 
@@ -171,19 +170,19 @@ def validate_salary(salary):
     try:
         if salary.isnumeric() == False:
             raise ValueError(
-                f"{salary} is not a valid number"
+                f"{salary} is not a valid answer"
             )
         else:
             if len(salary) > 5:
                 raise ValueError(
-                    f"Your salary must be 5 digits. You entered {len(salary)}"
+                    f"Your salary must be 5 digits. You entered {len(salary)}."
                 )
             if len(salary) < 5:
                 raise ValueError(
-                    f"Your salary must be 5 digits. You entered {len(salary)}"
+                    f"Your salary must be 5 digits. You entered {len(salary)}."
                 )
     except ValueError as e:
-        print(f"{e}\nPlease try again.")
+        print(f"{e}\nPlease try again and answer your annual salary.")
         return False
     return True    
 
@@ -194,8 +193,8 @@ def desired_increase():
     """
     while True:
         print("\nPlease answer this question as a whole number.")
-        print("No % symbol is required")
-        percentage_increase = input(f"What is your desired percentage annual salary increase?\n")
+        print("No % symbol is required.")
+        percentage_increase = input("What is your desired percentage annual salary increase?\n")
         if vaidate_percentage(percentage_increase):          
             break        
     return (percentage_increase, )
@@ -207,7 +206,7 @@ def vaidate_percentage(percentage_increase):
     try:
         if "%" in percentage_increase:
             raise ValueError(
-                "Please do not enter the percentage symbol"
+                "Please do not enter the percentage symbol."
             )
         if percentage_increase.isnumeric() == False:
             raise ValueError(
@@ -216,7 +215,7 @@ def vaidate_percentage(percentage_increase):
         else:
             if int(percentage_increase) >= 100:
                 raise ValueError(
-                    f"Your request for an increase of 100% or over has been denied."
+                    f"Sorry, your request for an increase of {percentage_increase}% is too high and will be denied."
                 )
     except ValueError as e:
         print(f"{e}\nPlease try again.")
@@ -239,7 +238,7 @@ def update_answers(answers):
     Updates worksheet with user answers
     """
     QUESTIONS.append_row(answers)
-    print(f"\nYour answers have been submitted")
+    print("\nYour answers have been submitted,")
 
 
 def update_salary(salary_data, names):
@@ -247,10 +246,10 @@ def update_salary(salary_data, names):
     Updates salary worksheet with desired salary
     """
     SALARY.append_row(salary_data)
-    print(f"Your salary request has been submitted\n")
+    print("and your salary request has been submitted.\n")
 
-    print(f"Thank you for your time today {names[0]}.")
-    print("Your manager will arrange a meeting with you this week")
+    print(f"Thank you for your time today {names[0]}!")
+    print("Your manager will arrange a meeting with you shortly.")
 
 def main():
     """
