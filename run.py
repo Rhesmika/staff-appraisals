@@ -197,7 +197,15 @@ def update_salary(salary_data):
     SALARY.append_row(salary_data)
     print(f"worksheet updated successfully\n")
 
-
+def desired_increase():
+    """
+    Gets users desired increase of wage
+    """
+    while True:
+            percentage_increase = input(f"What is your desired percentage increase?\n")
+            if vaidate percentage(percentage_increase):          
+                break        
+    return (percentage_increase, )
 
 
 
@@ -208,6 +216,7 @@ def main():
     Runs all functionss
     """
     names = get_employee_name()
+
     qi_answer = question_one()
     qii_answer = question_two()
     qiii_answer = question_three()
@@ -215,8 +224,10 @@ def main():
     qv_answer = question_five()
     answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
     update_answers(answers)
+
     current_salary = user_salary()
-    salary_data = (*names, *current_salary)
+    salary_data = (*names, *current_salary *percent)
+    percent = desired_increase()
     update_salary(salary_data)
 
 
