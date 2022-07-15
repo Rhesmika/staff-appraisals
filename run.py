@@ -163,29 +163,30 @@ def user_salary():
             salary = input(f"What is your current annual salary?\nenter amount with no punction or symbol\n")
             if validate_salary(salary):          
                 break        
-    return (salary)
+    return (salary, )
 
 def validate_salary(salary):
     """
     Checks salary input contains numbers only and no punctuation or symbols
     """
-    # try:
-    #     if salary.isnumeric() == False:
-    #         raise ValueError(
-    #             "You must enter a whole number"
-    #         )
-    #     else:
-    #         int(salary)
-    #         print(len(salary))
-    #         if len(salary) != 5:
-    #             raise ValueError(
-    #                 f"Exactly 5 numberica figures required, you provided {len(salary)}"
-    #             )
-
-    # except ValueError as e:
-    #     print(f"Invalid data: {e}, please try again.\n")
-    #     return False
-    # return True
+    try:
+        if salary.isnumeric() == False:
+            raise ValueError(
+                f"{salary} is not a valid number"
+            )
+        else:
+            if len(salary) > 5:
+                raise ValueError(
+                    f"Your salary must be 5 digits. You entered {len(salary)}"
+                )
+            if len(salary) < 5:
+                raise ValueError(
+                    f"Your salary must be 5 digits. You entered {len(salary)}"
+                )
+    except ValueError as e:
+        print(f"{e}\nPlease try again.")
+        return False
+    return True    
 
 
 def update_salary(salary_data):
