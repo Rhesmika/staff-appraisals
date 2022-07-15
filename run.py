@@ -22,8 +22,9 @@ def get_employee_name():
     Gets users name
     """
     while True: 
+        print("Welcome to your staff appraisal form.\n")
         first_name = input("what is your first name? \n")
-        last_name = input("what is your last name? \n")
+        last_name = input("\nwhat is your last name? \n")
         full_name = first_name,last_name
 
         if validate_name(full_name):
@@ -50,9 +51,12 @@ def question_one():
     """
     Gets users rating to question one from spreadsheet
     """
+    print("\nPlease answer the following questions rating your answer 1-5.")
+    print("1 being strongly disagree. 5 being strongly agree.\n")
     while True:
             topic = QUESTIONS.cell(1,3).value
-            qi_rating = input(f"I {topic}: \n")
+            print("On a scale of 1-5:")
+            qi_rating = input(f"I {topic}. \n")
             if validate_rating(qi_rating):          
                 break        
     return (qi_rating, )
@@ -63,7 +67,8 @@ def question_two():
     """
     while True:
             topic = QUESTIONS.cell(1,4).value
-            qii_rating = input(f"I {topic}: \n")
+            print("\nOn a scale of 1-5:")            
+            qii_rating = input(f"I {topic}. \n")
             if validate_rating(qii_rating):          
                 break        
     return (qii_rating, )
@@ -74,7 +79,8 @@ def question_three():
     """
     while True:
             topic = QUESTIONS.cell(1,5).value
-            qiii_rating = input(f"I {topic}: \n")
+            print("\nOn a scale of 1-5:")            
+            qiii_rating = input(f"I {topic}. \n")
             if validate_rating(qiii_rating):          
                 break        
     return (qiii_rating, )
@@ -85,7 +91,8 @@ def question_four():
     """
     while True:
             topic = QUESTIONS.cell(1,6).value
-            qiv_rating = input(f"I {topic}: \n")
+            print("\nOn a scale of 1-5:")            
+            qiv_rating = input(f"I {topic}. \n")
             if validate_rating(qiv_rating):          
                 break        
     return (qiv_rating, )
@@ -122,6 +129,7 @@ def question_five():
     """
     while True:
             topic = QUESTIONS.cell(1,7).value
+            print("\nPlease answer this question as 'yes' or 'no'")
             qv_rating = input(f"I {topic}: \n")
             if validate_yn(qv_rating):          
                 break        
@@ -150,9 +158,10 @@ def user_salary():
     Gets users current salary from user
     """
     while True:
-            salary = input(f"What is your current annual salary?\nenter amount with no punction or symbol\n")
-            if validate_salary(salary):          
-                break        
+        print("\nPlease answer this question without symbols or commas.")
+        salary = input(f"What is your current annual salary?\n")
+        if validate_salary(salary):          
+            break        
     return (salary, )
 
 def validate_salary(salary):
@@ -184,9 +193,11 @@ def desired_increase():
     Gets users desired increase of wage
     """
     while True:
-            percentage_increase = input(f"What is your desired percentage increase?\n")
-            if vaidate_percentage(percentage_increase):          
-                break        
+        print("\nPlease answer this question as a whole number.")
+        print("No % symbol is required")
+        percentage_increase = input(f"What is your desired percentage annual salary increase?\n")
+        if vaidate_percentage(percentage_increase):          
+            break        
     return (percentage_increase, )
 
 def vaidate_percentage(percentage_increase):
@@ -213,12 +224,13 @@ def vaidate_percentage(percentage_increase):
     return True   
 
 def calculate_salary_increase(current_salary, percent):
-    "Calculates the increase of salary with perentage increase"
+    """
+    Calculates the increase of salary with perentage increase
+    """
     one_percent_salary = int(current_salary[0]) / 100
     int_percent = int(percent[0])
     increase = one_percent_salary * int_percent
     new_salary = increase + int(current_salary[0])
-    print(round(new_salary))
     return new_salary
 
 
@@ -226,17 +238,19 @@ def update_answers(answers):
     """
     Updates worksheet with user answers
     """
-    print(f"Updating...\n")
     QUESTIONS.append_row(answers)
-    print(f"worksheet updated successfully\n")
+    print(f"\nYour answers have been submitted")
 
-def update_salary(salary_data):
+
+def update_salary(salary_data, names):
     """
     Updates salary worksheet with desired salary
     """
-    print(f"Updating...\n")
     SALARY.append_row(salary_data)
-    print(f"worksheet updated successfully\n")
+    print(f"Your salary request has been submitted\n")
+
+    print(f"Thank you for your time today {names[0]}.")
+    print("Your manager will arrange a meeting with you this week")
 
 def main():
     """
@@ -259,6 +273,6 @@ def main():
     salary_data = (*names, *current_salary, *percent, new_salary)
     
     update_answers(answers)
-    update_salary(salary_data)
+    update_salary(salary_data, names)
 
 main()
