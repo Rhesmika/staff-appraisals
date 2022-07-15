@@ -230,6 +230,14 @@ def vaidate_percentage(percentage_increase):
     return True   
 
 
+def calculate_salary_increase(current_salary, percent):
+    one_percent_salary = int(current_salary[0]) / 100
+    int_percent = int(percent[0])
+    increase = one_percent_salary * int_percent
+    new_salary = increase + int(current_salary[0])
+    print(round(new_salary))
+    return new_salary
+
 
 
 
@@ -249,7 +257,8 @@ def main():
 
     current_salary = user_salary()
     percent = desired_increase()
-    salary_data = (*names, *current_salary, *percent)
+    new_salary = calculate_salary_increase(current_salary, percent)
+    salary_data = (*current_salary, *percent, new_salary)
     update_salary(salary_data)
 
 
