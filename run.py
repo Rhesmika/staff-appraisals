@@ -17,8 +17,6 @@ data = QUESTIONS.get_all_values()
 SALARY = SHEET.worksheet('salary')
 
 
-
-
 def get_employee_name():
     """
     Gets users name
@@ -94,7 +92,7 @@ def question_four():
 
 def validate_rating(values):
     """
-    Validates if question answer is a number between 1 and 5. Raises error if not. 
+    Validates if question answer is a number between 1 and 5.
     """
     for rating in values:
         try:
@@ -147,14 +145,6 @@ def validate_yn(qv_rating):
     return True
 
 
-def update_answers(answers):
-    """
-    Updates worksheet with user answers
-    """
-    print(f"Updating...\n")
-    QUESTIONS.append_row(answers)
-    print(f"worksheet updated successfully\n")
-
 def user_salary():
     """
     Gets users current salary from user
@@ -189,16 +179,6 @@ def validate_salary(salary):
     return True    
 
 
-def update_salary(salary_data):
-    """
-    Updates salary worksheet with salary desire
-    """
-    print(f"Updating...\n")
-    SALARY.append_row(salary_data)
-    print(f"worksheet updated successfully\n")
-
-
-
 def desired_increase():
     """
     Gets users desired increase of wage
@@ -210,6 +190,9 @@ def desired_increase():
     return (percentage_increase, )
 
 def vaidate_percentage(percentage_increase):
+    """
+    Validates the percentage increase requested
+    """
     try:
         if "%" in percentage_increase:
             raise ValueError(
@@ -229,8 +212,8 @@ def vaidate_percentage(percentage_increase):
         return False
     return True   
 
-
 def calculate_salary_increase(current_salary, percent):
+    "Calculates the increase of salary with perentage increase"
     one_percent_salary = int(current_salary[0]) / 100
     int_percent = int(percent[0])
     increase = one_percent_salary * int_percent
@@ -239,32 +222,43 @@ def calculate_salary_increase(current_salary, percent):
     return new_salary
 
 
+def update_answers(answers):
+    """
+    Updates worksheet with user answers
+    """
+    print(f"Updating...\n")
+    QUESTIONS.append_row(answers)
+    print(f"worksheet updated successfully\n")
 
+def update_salary(salary_data):
+    """
+    Updates salary worksheet with desired salary
+    """
+    print(f"Updating...\n")
+    SALARY.append_row(salary_data)
+    print(f"worksheet updated successfully\n")
 
 def main():
     """
     Runs all functionss
     """
-    # names = get_employee_name()
+    names = get_employee_name()
 
-    # qi_answer = question_one()
-    # qii_answer = question_two()
-    # qiii_answer = question_three()
-    # qiv_answer = question_four()
-    # qv_answer = question_five()
-    # answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
-    # update_answers(answers)
+    qi_answer = question_one()
+    qii_answer = question_two()
+    qiii_answer = question_three()
+    qiv_answer = question_four()
+    qv_answer = question_five()
 
+    answers = (*names, *qi_answer, *qii_answer, *qiii_answer, *qiv_answer, *qv_answer)
+    
     current_salary = user_salary()
     percent = desired_increase()
     new_salary = calculate_salary_increase(current_salary, percent)
-    salary_data = (*current_salary, *percent, new_salary)
-    update_salary(salary_data)
 
-
+    salary_data = (*names, *current_salary, *percent, new_salary)
     
-
-
-
+    update_answers(answers)
+    update_salary(salary_data)
 
 main()
